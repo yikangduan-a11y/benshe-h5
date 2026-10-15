@@ -1,0 +1,242 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<title>本色 · 找到真正衬你的颜色</title>
+<style>
+
+@font-face{font-family:CormI;src:url(fonts/cormi.woff2) format("woff2");font-display:swap}
+:root{--paper:#F5F0E8;--ink:#2B2522;--soft:#8C8279;--rose:#B5687C;--line:#E2D9CD}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--paper)}
+body{font-family:-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;color:var(--ink)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:multiply;z-index:50;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .4 0 0 0 .18 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>")}
+.serif{font-family:"Songti SC","STSong","Noto Serif CJK SC","Noto Serif SC",serif}
+.wk{font-family:WK,"Kaiti SC","STKaiti",KaiTi,cursive}.en{font-family:CormI,Georgia,serif;font-style:italic}
+.pg{display:none;max-width:430px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative;padding-bottom:120px}
+.pg.on{display:block;animation:fi .35s ease}@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.fab{position:absolute;width:120px;height:150px;clip-path:polygon(0 0,100% 0,100% 100%,95% 97%,90% 100%,85% 97%,80% 100%,75% 97%,70% 100%,65% 97%,60% 100%,55% 97%,50% 100%,45% 97%,40% 100%,35% 97%,30% 100%,25% 97%,20% 100%,15% 97%,10% 100%,5% 97%,0 100%);
+ background-image:linear-gradient(115deg,rgba(255,255,255,.22),rgba(255,255,255,0) 40%,rgba(0,0,0,.08)),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><path d='M0 3h6M3 0v6' stroke='rgba(0,0,0,.07)' stroke-width='1'/></svg>");filter:drop-shadow(0 8px 10px rgba(60,40,30,.18))}
+.fab span{position:absolute;left:10px;bottom:14px;font-size:13px;color:rgba(255,255,255,.92)}
+.tape{position:absolute;width:56px;height:20px;background:rgba(240,228,205,.75);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.btn{display:flex;justify-content:center;align-items:center;height:56px;border-radius:28px;background:var(--ink);color:#F5F0E8;font-size:17px;font-weight:500;letter-spacing:2px;border:0;width:100%;cursor:pointer;font-family:inherit}
+.btn:disabled{opacity:.35}
+.foot{position:fixed;left:50%;transform:translateX(-50%);width:100%;max-width:430px;bottom:0;padding:16px 20px calc(24px + env(safe-area-inset-bottom));background:linear-gradient(rgba(245,240,232,0),var(--fb,var(--paper)) 30%);z-index:40}
+.opt{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:18px;background:rgba(255,255,255,.55);box-shadow:0 0 0 1px var(--line);cursor:pointer;transition:all .15s}
+.opt.sel{background:#fff;box-shadow:0 0 0 1.5px var(--ink)}
+.opt .ck{width:22px;height:22px;border-radius:50%;border:1.5px solid #D3C8BB;flex:none;position:relative}
+.opt.sel .ck{background:var(--ink);border-color:var(--ink)}
+.opt.sel .ck::after{content:"";position:absolute;left:6px;top:3px;width:6px;height:10px;border:solid #F5F0E8;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ic{width:44px;height:44px;border-radius:12px;background:#EFE6DC;flex:none;display:flex;align-items:center;justify-content:center}
+.ghost{flex:1;height:44px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 0 0 1px #CFC6BA;background:none;border:0;color:var(--ink);font-family:inherit}
+.tier{margin:14px 20px 0;padding:20px 22px;border-radius:22px;cursor:pointer;transition:box-shadow .15s}
+.tier.a{background:rgba(255,255,255,.6);box-shadow:0 0 0 1px var(--line)}
+.tier.b{background:#2B2522;color:#F5F0E8;position:relative}
+.tier.sel.a{box-shadow:0 0 0 2px var(--ink)}.tier.sel.b{box-shadow:0 0 0 3px var(--rose)}
+.toast{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);background:rgba(43,37,34,.92);color:#F5F0E8;padding:12px 20px;border-radius:14px;font-size:14px;z-index:99;display:none}
+.sw{width:44px;height:26px;border-radius:13px;background:#D6CCBF;position:relative;flex:none;transition:.2s}
+.sw.on{background:var(--rose)}.sw i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}.sw.on i{left:21px}
+input.tel{width:100%;height:46px;border-radius:14px;border:1px solid var(--line);background:#fff;padding:0 14px;font-size:16px;margin-top:10px;font-family:inherit}
+</style></head><body>
+
+<!-- 1 HOME -->
+<section class="pg on" id="home">
+ <div style="padding:22px 28px 0;display:flex;justify-content:space-between;align-items:baseline">
+  <div class="serif" style="font-size:20px;font-weight:700;letter-spacing:4px">本色</div>
+  <div class="en" style="font-size:15px;color:var(--soft)">Personal Color Studio</div>
+ </div>
+ <div style="height:1px;background:var(--ink);margin:12px 28px 0;opacity:.8"></div>
+ <div style="position:relative;height:330px;width:390px;margin:0 auto;max-width:100%">
+  <div class="fab" style="left:40px;top:44px;background-color:#C78C6A;transform:rotate(-14deg)"><span class="en">Autumn</span></div>
+  <div class="fab" style="left:105px;top:28px;background-color:#E7B7A0;transform:rotate(-5deg)"><span class="en">Spring</span></div>
+  <div class="fab" style="left:170px;top:34px;background-color:#A9B4CC;transform:rotate(4deg)"><span class="en">Summer</span></div>
+  <div class="fab" style="left:232px;top:52px;background-color:#5B4E6E;transform:rotate(13deg)"><span class="en">Winter</span></div>
+  <div class="tape" style="left:150px;top:22px;transform:rotate(-3deg)"></div>
+  <div class="wk" style="position:absolute;left:44px;top:232px;font-size:17px;color:var(--rose);transform:rotate(-4deg)">同一支口红，为什么她涂好看？</div>
+  <svg style="position:absolute;left:40px;top:258px" width="230" height="14"><path d="M2 9 C 50 2, 110 12, 160 6 S 215 4, 228 8" stroke="#B5687C" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+ </div>
+ <div style="padding:0 28px">
+  <div class="serif" style="font-size:38px;font-weight:700;line-height:1.28;letter-spacing:1px">找到真正<br>衬你的颜色</div>
+  <div style="margin-top:14px;font-size:14px;color:var(--soft);line-height:1.8">线下色彩诊断师常用的四季型方法，<br>先用 4 道题，测出你大致属于哪一季。</div>
+  <div style="display:flex;gap:18px;margin-top:22px;font-size:13px;align-items:baseline">
+   <span><b class="en" style="font-size:18px">4</b> 道题</span><span style="color:var(--line)">|</span><span><b class="en" style="font-size:18px">1</b> 分钟</span><span style="color:var(--line)">|</span><span>不用拍照</span>
+  </div>
+ </div>
+ <div class="foot"><button class="btn" id="go" onclick="start()">免费测一下</button>
+  <div style="text-align:center;margin-top:12px;font-size:12px;color:var(--soft)">不登录、不上传照片</div></div>
+</section>
+
+<!-- 2 QUIZ -->
+<section class="pg" id="quiz">
+ <div style="padding:26px 28px 0;display:flex;align-items:center;gap:14px">
+  <div class="en" id="qn" style="font-size:15px;color:var(--soft)">01 / 04</div>
+  <div style="flex:1;height:2px;background:var(--line);position:relative"><div id="qbar" style="position:absolute;left:0;top:0;bottom:0;width:25%;background:var(--ink);transition:width .3s"></div></div>
+ </div>
+ <div style="padding:46px 28px 0">
+  <div class="wk" id="qh" style="font-size:15px;color:var(--rose)"></div>
+  <div class="serif" id="qt" style="font-size:28px;font-weight:700;line-height:1.45;margin-top:12px"></div>
+ </div>
+ <div id="opts" style="padding:36px 28px 0;display:flex;flex-direction:column;gap:14px"></div>
+ <div class="wk" id="qtip" style="padding:28px 44px 0;font-size:14px;color:var(--soft);transform:rotate(-2deg)"></div>
+ <div class="foot"><button class="btn" id="next" disabled onclick="next()">下一题</button></div>
+</section>
+
+<!-- 3 RESULT -->
+<section class="pg" id="result">
+ <div id="rbg" style="position:absolute;inset:0;z-index:-1"></div>
+ <div style="margin:22px 20px 0;background:#F8F6F2;border-radius:26px;padding:26px 24px 24px;position:relative;box-shadow:0 14px 30px -18px rgba(50,60,90,.35)">
+  <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--soft)"><span>本色 · 季型卡</span><span class="en" id="no" style="font-size:14px"></span></div>
+  <div style="font-size:14px;color:var(--soft);margin-top:22px">你初步是</div>
+  <div style="display:flex;align-items:baseline;gap:12px;margin-top:4px;flex-wrap:wrap"><div class="serif" id="rn" style="font-size:52px;font-weight:700;letter-spacing:2px"></div><div class="en" id="ren" style="font-size:22px"></div></div>
+  <div id="rd" style="font-size:14px;line-height:1.8;margin-top:10px;color:#4A4540"></div>
+  <div id="rfab" style="position:relative;height:150px;margin-top:18px"></div>
+  <div class="wk" style="position:absolute;right:26px;top:62px;font-size:14px;color:var(--rose);transform:rotate(5deg)">下面三个色最衬你</div>
+  <div style="display:flex;gap:10px;margin-top:6px">
+   <button class="ghost" onclick="saveCard()">保存季型卡</button><button class="ghost" onclick="share()">发给闺蜜测</button>
+  </div>
+ </div>
+ <div style="margin:18px 20px 0;padding:0 4px">
+  <div style="display:flex;justify-content:space-between;align-items:baseline"><div class="serif" style="font-size:18px;font-weight:700">完整报告里还有</div><div class="en" style="font-size:14px;color:var(--soft)">4 chapters</div></div>
+  <div style="margin-top:10px;font-size:14px;line-height:2.3">
+   <div style="display:flex;justify-content:space-between;border-bottom:1px solid #D9DCE4"><span>01　16 色专属色卡 + 避雷色</span><span style="filter:blur(3px);color:#7C86A4">■■■■</span></div>
+   <div style="display:flex;justify-content:space-between;border-bottom:1px solid #D9DCE4"><span>02　适合你的口红色号</span><span style="filter:blur(3px);color:#B5687C">■■ ■■</span></div>
+   <div style="display:flex;justify-content:space-between;border-bottom:1px solid #D9DCE4;opacity:.6"><span>03　发色和发型方向</span><span style="filter:blur(3px)">■■■</span></div>
+   <div style="display:flex;justify-content:space-between;opacity:.35"><span>04　穿搭配色</span><span style="filter:blur(3px)">■■■■</span></div>
+  </div>
+ </div>
+ <div class="foot"><button class="btn" id="unlock" onclick="toPay()">解锁完整报告</button></div>
+</section>
+
+<!-- 4 PAYWALL -->
+<section class="pg" id="pay">
+ <div style="padding:26px 28px 0">
+  <div class="en" style="font-size:16px;color:var(--soft)">Your Color Report</div>
+  <div class="serif" style="font-size:28px;font-weight:700;line-height:1.4;margin-top:4px">选一份适合你的报告</div>
+ </div>
+ <div class="tier a" id="t99" onclick="pick('9.9')" style="margin-top:22px">
+  <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:17px;font-weight:600">完整报告</div><div><span style="font-size:14px">¥</span><span class="serif" style="font-size:30px;font-weight:700">9.9</span></div></div>
+  <div style="font-size:13px;color:var(--soft);line-height:1.9;margin-top:8px">16 色专属色卡 · 口红色号 · 发色方向 · 穿搭配色</div>
+ </div>
+ <div class="tier b sel" id="t299" onclick="pick('29.9')">
+  <div class="wk" style="position:absolute;right:18px;top:-14px;background:#B5687C;color:#fff;font-size:13px;padding:4px 12px;border-radius:12px;transform:rotate(4deg)">推荐</div>
+  <div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:17px;font-weight:600">报告 + 上脸试色</div><div><span style="font-size:14px">¥</span><span class="serif" style="font-size:30px;font-weight:700">29.9</span></div></div>
+  <div style="font-size:13px;color:#BDB3A8;line-height:1.9;margin-top:8px">包含完整报告，再用你的照片上脸试发色和口红</div>
+  <div style="display:flex;gap:10px;margin-top:16px">
+   <div style="flex:1;height:120px;border-radius:14px;background:linear-gradient(160deg,#6B5848,#3E332B);position:relative;overflow:hidden">
+    <div style="position:absolute;left:50%;top:22px;width:56px;height:70px;margin-left:-28px;border-radius:50% 50% 46% 46%;background:#E2C3AE"></div>
+    <div style="position:absolute;left:50%;top:14px;width:76px;height:60px;margin-left:-38px;border-radius:40px 40px 10px 10px;background:#7A4E2E"></div>
+    <div style="position:absolute;left:50%;top:70px;width:16px;height:5px;margin-left:-8px;border-radius:3px;background:#D0623E"></div>
+    <div style="position:absolute;left:8px;bottom:8px;font-size:11px;color:#E8DED3">试色前</div></div>
+   <div style="flex:1;height:120px;border-radius:14px;background:linear-gradient(160deg,#9AA7C0,#5D6883);position:relative;overflow:hidden">
+    <div style="position:absolute;left:50%;top:22px;width:56px;height:70px;margin-left:-28px;border-radius:50% 50% 46% 46%;background:#EBCFC0"></div>
+    <div style="position:absolute;left:50%;top:14px;width:76px;height:60px;margin-left:-38px;border-radius:40px 40px 10px 10px;background:#4A4048"></div>
+    <div style="position:absolute;left:50%;top:70px;width:16px;height:5px;margin-left:-8px;border-radius:3px;background:#B5687C"></div>
+    <div style="position:absolute;left:8px;bottom:8px;font-size:11px;color:#fff">冷棕发 + 豆沙玫瑰</div></div>
+  </div>
+  <div style="font-size:11px;color:#8F857B;margin-top:8px">示意图，正式版使用你本人照片，不美颜</div>
+ </div>
+ <div style="margin:18px 28px 0;font-size:12px;color:var(--soft);line-height:1.8">线下色彩诊断一次通常要几百元起。<br>照片只用于生成试色效果，生成后即删除。</div>
+ <div class="foot"><button class="btn" id="buy" onclick="buy()">¥29.9 立即购买</button></div>
+</section>
+
+<!-- 5 FREE REPORT -->
+<section class="pg" id="report">
+ <div style="margin:22px 20px 0;padding:14px 18px;border-radius:16px;background:#2B2522;color:#F5F0E8;display:flex;align-items:center;gap:12px">
+  <div class="wk" style="font-size:20px;color:#E8B4C2">礼</div>
+  <div style="font-size:13px;line-height:1.6">内测期间，完整报告<b>免费</b>送给你<br><span style="color:#BDB3A8;font-size:12px">感谢你愿意为它买单，本次不会扣费</span></div>
+ </div>
+ <div style="padding:20px 28px 0">
+  <div class="en" id="fen" style="font-size:15px;color:var(--soft)"></div>
+  <div class="serif" id="fn" style="font-size:26px;font-weight:700;margin-top:2px"></div>
+ </div>
+ <div style="padding:16px 28px 0">
+  <div style="font-size:13px;font-weight:600"><span class="en" style="color:var(--rose);font-size:16px">01</span>　专属色卡</div>
+  <div id="fpal" style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:10px"></div>
+  <div id="favoid" style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--soft)"></div>
+ </div>
+ <div style="margin:18px 28px 0;border-top:1px solid var(--line)"></div>
+ <div style="padding:14px 28px 0">
+  <div style="font-size:13px;font-weight:600"><span class="en" style="color:var(--rose);font-size:16px">02</span>　口红色号方向</div>
+  <div id="flip" style="display:flex;gap:10px;margin-top:10px"></div>
+ </div>
+ <div style="margin:16px 28px 0;border-top:1px solid var(--line)"></div>
+ <div style="padding:14px 28px 0;font-size:13px;line-height:1.9">
+  <div><span class="en" style="color:var(--rose);font-size:16px">03</span>　<b>发色</b>　<span id="fhair"></span></div>
+  <div><span class="en" style="color:var(--rose);font-size:16px">04</span>　<b>穿搭</b>　<span id="fwear"></span></div>
+ </div>
+ <div style="margin:22px 20px 0;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.6);box-shadow:0 0 0 1px var(--line)">
+  <div style="display:flex;align-items:center;justify-content:space-between" onclick="toggleR()">
+   <div style="font-size:12px;line-height:1.6">换季时提醒我复测<br><span style="color:var(--soft)">留手机号（可选）</span></div>
+   <div class="sw" id="sw"><i></i></div>
+  </div>
+  <div id="telbox" style="display:none"><input class="tel" id="tel" type="tel" maxlength="11" placeholder="手机号"><button class="btn" style="height:44px;margin-top:10px;font-size:15px" onclick="leave()">确定</button></div>
+ </div>
+ <div class="foot"><button class="btn" onclick="saveCard()">保存完整报告</button></div>
+</section>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const sid=(localStorage.bs_sid ||= Math.random().toString(36).slice(2,10));
+const src=new URLSearchParams(location.search).get('from')||'direct';
+function track(e,d={}){if(location.protocol==='file:')return;const b=JSON.stringify({sid,src,e,...d,t:Date.now()});
+ if(!(navigator.sendBeacon&&navigator.sendBeacon('api/e',b)))fetch('api/e',{method:'POST',body:b,keepalive:true}).catch(()=>{})}
+function toast(t){const x=$('toast');x.textContent=t;x.style.display='block';clearTimeout(x._t);x._t=setTimeout(()=>x.style.display='none',1800)}
+track('enter');
+const V=c=>`<svg width="44" height="44"><path d="M10 34 C 16 24, 22 26, 26 18 S 32 10, 36 8" stroke="${c}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M22 25 C 26 28, 30 30, 34 31" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+const DOT=a=>`<svg width="30" height="30">${a.map((c,i)=>`<circle cx="${9+i*12}" cy="15" r="8" fill="${c}"/>`).join('')}</svg>`;
+const Q=[
+ {h:'在自然光下，翻过手腕看一眼',t:'手腕内侧的血管，<br>更接近哪种颜色？',tip:'* 别在暖黄灯下看，会偏绿哦',o:[
+  {a:'偏蓝、偏紫',b:'像淡淡的青紫色',i:V('#6E7FB0'),s:{c:2}},{a:'偏绿、偏橄榄',b:'带一点黄绿调',i:V('#7E9A6A'),s:{w:2}},{a:'看不太出来',b:'蓝绿都有一点',i:V('#8E8A9E'),s:{}}]},
+ {h:'对着镜子，素颜试一下',t:'哪种首饰戴上，<br>脸色更好看？',tip:'* 看脸，不看首饰本身好不好看',o:[
+  {a:'银色、铂金',b:'戴上脸更干净、透亮',i:DOT(['#C9CDD4','#E6E8EC']),s:{c:2}},{a:'金色、玫瑰金',b:'戴上更有气色',i:DOT(['#D4AF62','#E5B9A0']),s:{w:2}},{a:'都差不多',b:'看不出明显区别',i:DOT(['#C9CDD4','#D4AF62']),s:{}}]},
+ {h:'回想一下去年夏天',t:'晒太阳之后，<br>你的皮肤通常会？',tip:'* 按没涂防晒时的情况选',o:[
+  {a:'先变红，不太容易黑',b:'过几天又白回来',i:DOT(['#E8A4A0','#F1D3C9']),s:{c:1,l:1}},{a:'很快晒黑，不太会红',b:'一晒就是小麦色',i:DOT(['#B98A63','#D9B48F']),s:{w:1,h:1}},{a:'又红又黑',b:'两种都有',i:DOT(['#E8A4A0','#B98A63']),s:{}}]},
+ {h:'最后一题，看看头发和眼睛',t:'你的发色和瞳色，<br>整体更像哪种？',tip:'* 按没染过的自然发色选',o:[
+  {a:'乌黑头发、深黑眼睛',b:'和肤色对比很强',i:DOT(['#1E1A1A','#3A2E2A']),s:{h:2}},{a:'偏棕的头发或眼睛',b:'整体柔和、不扎眼',i:DOT(['#6B4A35','#8E6A4E']),s:{l:2}},{a:'说不好',b:'介于两者之间',i:DOT(['#3A2E2A','#6B4A35']),s:{}}]},
+];
+const S={
+ summer:{n:'冷夏型',en:'Cool Summer',fc:'#3C4560',ec:'#7C86A4',bg:'#EDEFF4',d:'像初夏傍晚的天色：温柔、带一点灰调。<br>清透的冷色会让你看起来干净又有气色。',
+  top:[['#C99AAE','烟粉'],['#9DB3CF','雾霾蓝'],['#A9A1C8','薰衣草']],
+  pal:['#C99AAE','#9DB3CF','#A9A1C8','#B5687C','#6E7F96','#8C6B8A','#D9C3CF','#7F9AB4','#E3D5DE','#5E6A86','#B9A3C4','#9E7088','#C4CCDA','#A88196','#7D8BA8','#D0B6C2'],
+  avoid:[['#E07A2E','#C8A04A','#7A5A2E'],'橘色、土黄、驼棕'],lip:[['#B5687C','豆沙玫瑰'],['#9E3F5C','冷调莓果'],['#D98FA3','水粉色']],hair:'冷棕、亚麻灰、烟灰紫',wear:'雾霾蓝、灰粉打底，浅灰代替纯白'},
+ winter:{n:'冷冬型',en:'Cool Winter',fc:'#2A2F45',ec:'#5B4E6E',bg:'#E9E8EE',d:'像冬夜里的雪和灯：清晰、利落、对比分明。<br>纯正饱和的颜色最能撑起你的气场。',
+  top:[['#8E1F3E','酒红'],['#24489A','宝蓝'],['#2A2A30','墨黑']],
+  pal:['#8E1F3E','#24489A','#2A2A30','#FFFFFF','#C8102E','#0F6B5C','#5B2A86','#E5E5EE','#B0004E','#1C2C5B','#6E6E78','#D7DBE8','#7A1F5C','#00808A','#3A1F5D','#F2F2F7'],
+  avoid:[['#D9B98C','#B8A07A','#E8A87C'],'米驼、卡其、杏橘'],lip:[['#B0102E','正红'],['#7A1F3E','酒红'],['#9B2D6B','冷调梅子']],hair:'自然黑、冷黑、蓝黑、深酒红',wear:'黑白灰、藏青打底，正红点缀'},
+ spring:{n:'暖春型',en:'Warm Spring',fc:'#8A4A2E',ec:'#C98A64',bg:'#F7EEE4',d:'像春天午后的阳光：明亮、轻盈、有元气。<br>清透的暖色会让你整个人亮起来。',
+  top:[['#EE9A7E','珊瑚'],['#F2C48D','杏色'],['#A9C98A','嫩芽绿']],
+  pal:['#EE9A7E','#F2C48D','#A9C98A','#F6B2A6','#FFD9A6','#86C7BE','#E8735A','#FBE6C4','#F4A261','#C5DE9B','#F7C6B4','#E9B872','#7FB8B0','#F28C6F','#FFE8C9','#D9A066'],
+  avoid:[['#2B2B2B','#5B2A86','#6F7A8A'],'纯黑、深紫、灰蓝'],lip:[['#E8735A','珊瑚橘'],['#F09A84','蜜桃'],['#D9534F','清透暖红']],hair:'蜜茶棕、焦糖奶茶、浅金棕',wear:'奶油白、浅驼打底，珊瑚和嫩绿点亮'},
+ autumn:{n:'暖秋型',en:'Warm Autumn',fc:'#5A3420',ec:'#A0612F',bg:'#F1E8DC',d:'像秋天落叶和焦糖拿铁：温润、浓郁、有质感。<br>大地色系会让你显得高级又有气色。',
+  top:[['#A0612F','焦糖'],['#6B7B3A','橄榄'],['#B5523B','砖红']],
+  pal:['#A0612F','#6B7B3A','#B5523B','#C99A4B','#7A4A2B','#8C8A4A','#D08A5B','#4F5A3A','#9C4A2F','#C7A26A','#5E3A26','#A7A15A','#E0B080','#7C2F23','#B88B5A','#3F4A2F'],
+  avoid:[['#FF5FA2','#5AC8FA','#E5E5EE'],'荧光粉、冰蓝、冷白'],lip:[['#B5523B','砖红'],['#A0612F','焦糖'],['#C0703F','南瓜色']],hair:'巧克力棕、红棕、深焦糖',wear:'驼色、卡其打底，橄榄绿和酒红棕叠穿'},
+};
+let qi=0,sc,ans=[],season='',tier='29.9';
+function show(id){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));$(id).classList.add('on');scrollTo(0,0)}
+function start(){track('start');qi=0;ans=[];show('quiz');rq()}
+function rq(){const q=Q[qi];$('qn').textContent=`0${qi+1} / 04`;$('qbar').style.width=((qi+1)/4*100)+'%';$('qh').textContent=q.h;$('qt').innerHTML=q.t;$('qtip').textContent=q.tip;
+ $('opts').innerHTML=q.o.map((o,k)=>`<div class="opt${ans[qi]===k?' sel':''}" onclick="sel(${k})"><div class="ic">${o.i}</div><div style="flex:1"><div style="font-size:16px;font-weight:600">${o.a}</div><div style="font-size:12px;color:var(--soft);margin-top:3px">${o.b}</div></div><div class="ck"></div></div>`).join('');
+ $('next').disabled=ans[qi]===undefined;$('next').textContent=qi===3?'看结果':'下一题'}
+function sel(k){ans[qi]=k;rq()}
+function next(){if(qi<3){qi++;rq();return}
+ sc={c:0,w:0,h:0,l:0};ans.forEach((k,i)=>{const s=Q[i].o[k].s;for(const x in s)sc[x]+=s[x]});
+ const warm=sc.w>sc.c,deep=sc.h>=sc.l;season=warm?(deep?'autumn':'spring'):(deep?'winter':'summer');
+ track('result',{season,ans:ans.join('')});rr()}
+function rr(){const s=S[season];$('rbg').style.background=s.bg;document.body.style.background=s.bg;document.body.style.setProperty("--fb",s.bg);
+ $('no').textContent='No.'+String(1000+parseInt(sid,36)%9000);$('rn').textContent=s.n;$('rn').style.color=s.fc;$('ren').textContent=s.en;$('ren').style.color=s.ec;$('rd').innerHTML=s.d;
+ const rot=[-6,2,7];$('rfab').innerHTML=s.top.map((c,i)=>`<div class="fab" style="left:${i*98}px;top:${[4,0,6][i]}px;width:96px;height:124px;background-color:${c[0]};transform:rotate(${rot[i]}deg)"><span>${c[1]}</span></div>`).join('');
+ show('result')}
+function toPay(){document.body.style.removeProperty("--fb");document.body.style.background='';track('view_pay',{season});show('pay')}
+function pick(p){tier=p;$('t99').classList.toggle('sel',p==='9.9');$('t299').classList.toggle('sel',p==='29.9');$('buy').textContent=`¥${p} 立即购买`;track('tier_select',{tier:p})}
+function buy(){track('buy_click',{tier,season});const s=S[season];
+ $('fen').textContent='Full Report · '+s.en;$('fn').textContent=s.n+' · 完整报告';$('fn').style.color=s.fc;
+ $('fpal').innerHTML=s.pal.map(c=>`<div style="height:34px;border-radius:6px;background:${c};box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)"></div>`).join('');
+ $('favoid').innerHTML='避开：'+s.avoid[0].map(c=>`<span style="width:18px;height:18px;border-radius:50%;background:${c};display:inline-block"></span>`).join('')+' '+s.avoid[1];
+ $('flip').innerHTML=s.lip.map(l=>`<div style="flex:1;padding:10px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px var(--line)"><div style="height:8px;border-radius:4px;background:${l[0]}"></div><div style="font-size:12px;margin-top:6px">${l[1]}</div></div>`).join('');
+ $('fhair').textContent=s.hair;$('fwear').textContent=s.wear;show('report')}
+function toggleR(){const on=$('sw').classList.toggle('on');$('telbox').style.display=on?'block':'none'}
+function leave(){const t=$('tel').value.trim();if(!/^1\d{10}$/.test(t))return toast('请输入 11 位手机号');track('leave_phone',{tier,season,phone:t});$('telbox').style.display='none';toast('好的，换季时提醒你')}
+function saveCard(){track('save_click',{season});toast('长按截图即可保存')}
+function share(){track('share_click',{season});const d={title:'本色 · 测测你是哪个季型',text:'4 道题测出最衬你的颜色',url:location.origin+location.pathname+'?from=share'};
+ if(navigator.share)navigator.share(d).catch(()=>{});else{navigator.clipboard?.writeText(d.url);toast('链接已复制，发给闺蜜吧')}}
+</script></body></html>
